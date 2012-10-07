@@ -23,6 +23,7 @@
 <div class="container" id="page">
 
 	<div id="header">
+        <?php $this->widget('application.modules.hybridauth.widgets.renderProviders'); ?>
 		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
 	</div><!-- header -->
 

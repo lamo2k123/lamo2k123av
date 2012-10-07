@@ -1,13 +1,20 @@
 <?php
 
-// change the following paths if necessary
-$yii=dirname(__FILE__).'/../framework/yii.php';
-$config=dirname(__FILE__).'/protected/config/main.php';
+$webRoot = dirname( __FILE__ );
 
-// remove the following lines when in production mode
-defined('YII_DEBUG') or define('YII_DEBUG',true);
-// specify how many levels of call stack should be shown in each log message
-defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
+if( getenv( 'AppMode' ) ) {
 
-require_once($yii);
-Yii::createWebApplication($config)->run();
+    defined( 'YII_DEBUG' ) || define( 'YII_DEBUG', true );
+    defined( 'YII_TRACE_LEVEL' ) || define( 'YII_TRACE_LEVEL', 3 );
+
+    require_once( $webRoot . '/../framework/yii.php' );
+    Yii::createWebApplication( $webRoot . '/protected/config/development.php' )->run();
+
+} else {
+
+    defined( 'YII_DEBUG' ) || define( 'YII_DEBUG', false );
+
+    require_once( $webRoot . '/../framework/yii.php' );
+    Yii::createWebApplication( $webRoot . '/protected/config/production.php' )->run();
+
+}
